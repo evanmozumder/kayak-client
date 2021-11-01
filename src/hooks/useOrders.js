@@ -8,7 +8,7 @@ const useOrders = () => {
   const { user } = context;
 
   useEffect(() => {
-    fetch("http://localhost:5000/orders")
+    fetch("https://murmuring-plains-87841.herokuapp.com/orders")
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, []);

@@ -17,7 +17,7 @@ const MyOrders = () => {
       const new_order = [rest_orders];
       setOrderCount(rest_orders.length);
       found.orders = new_order;
-      const url = `http://localhost:5000/orders/${found._id}`;
+      const url = `https://murmuring-plains-87841.herokuapp.com//${found._id}`;
       fetch(url, {
         method: "PUT",
         headers: {

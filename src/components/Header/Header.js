@@ -47,6 +47,12 @@ const Header = () => {
                 >
                   <h5>My Orders : {orderCount}</h5>
                 </Nav.Link>
+                <Nav.Link as={Link} to="/manageallorders">
+                  Manage All Orders
+                </Nav.Link>
+                <Nav.Link as={Link} to="/addnewservice">
+                  Add New Service
+                </Nav.Link>
               </>
             ) : (
               <>

@@ -4,7 +4,7 @@ import RecommendedDeal from "../RecommendedDeal/RecommendedDeal";
 const RecommendedDeals = () => {
   const [deals, setDeals] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/deals")
+    fetch("https://murmuring-plains-87841.herokuapp.com/deals")
       .then((res) => res.json())
       .then((data) => setDeals(data));
   }, []);

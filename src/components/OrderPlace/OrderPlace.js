@@ -11,7 +11,7 @@ const OrderPlace = () => {
   const [details, setDetails] = useState({});
 
   // getting ordered services
-  fetch(`http://localhost:5000/orders/${order_id}`)
+  fetch(`https://murmuring-plains-87841.herokuapp.com/orders/${order_id}`)
     .then((res) => res.json())
     .then((data) => setDetails(data));
   const {
@@ -40,7 +40,7 @@ const OrderPlace = () => {
       found.phone = data.phone;
       console.log("new state of old user", found);
       console.log("data", data);
-      const url = `http://localhost:5000/orders/${found._id}`;
+      const url = `https://murmuring-plains-87841.herokuapp.com//${found._id}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -52,7 +52,7 @@ const OrderPlace = () => {
         .then((data) => {});
     } else {
       data.orders = [order_id];
-      fetch("http://localhost:5000/orders", {
+      fetch("https://murmuring-plains-87841.herokuapp.com/orders", {
         method: "POST",
         headers: {
           "content-type": "application/json",
