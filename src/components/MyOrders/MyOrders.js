@@ -12,7 +12,7 @@ const MyOrders = () => {
       .then((data) => setOrderDetails(data)); */
 
   const found = orders?.find((order) => order.email === user.email);
-  console.log(found);
+  // console.log(found);
   /* const getDetails = (orderId) => {
     fetch(
       `https://murmuring-plains-87841.herokuapp.com/specificorder/${orderId}`
@@ -29,11 +29,11 @@ const MyOrders = () => {
     const choice = window.confirm(
       "Are yOu sure you want to cancel this booking?"
     );
-    console.log("choice", choice);
+    // console.log("choice", choice);
     if (choice) {
       const rest_orders = found.orders.filter((order) => order !== id);
       const new_order = rest_orders;
-      console.log("after deleted", new_order);
+      // console.log("after deleted", new_order);
       setOrderCount(rest_orders.length);
       found.orders = new_order;
       const url = `https://murmuring-plains-87841.herokuapp.com/orders/${found._id}`;

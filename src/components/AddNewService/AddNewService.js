@@ -6,7 +6,7 @@ import "./AddNewService.css";
 const AddService = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     axios
       .post("https://murmuring-plains-87841.herokuapp.com/services", data)
       .then((res) => {

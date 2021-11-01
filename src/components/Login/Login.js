@@ -13,11 +13,11 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        console.log("user", user);
+        // console.log("user", user);
         setUser(user);
         history.push(redirect_uri);
-        console.log("redirect from", redirect_uri);
-        console.log("history", history);
+        // console.log("redirect from", redirect_uri);
+        // console.log("history", history);
       })
       .catch((err) => {
         const errorMessage = err.message;
