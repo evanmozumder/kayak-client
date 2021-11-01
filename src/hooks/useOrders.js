@@ -3,8 +3,10 @@ import useFirebase from "./useFirebase";
 
 const useOrders = () => {
   const [orders, setOrders] = useState([]);
+  // const [orderDetails, setOrderDetails] = useState[{}]
   const context = useFirebase();
 
+  const [orderCount, setOrderCount] = useState(0);
   const { user } = context;
 
   useEffect(() => {
@@ -12,15 +14,19 @@ const useOrders = () => {
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, []);
+  /* useEffect(()=>{
+    fetch(`https://murmuring-plains-87841.herokuapp.com/specificorder/${id}`)
+      .then((res) => res.json())
+      .then((data) => setOrderDetails(data));
+  },[]) */
   const found = orders.find((order) => order.email === user.email);
   const count = found?.orders.length;
-  const [orderCount, setOrderCount] = useState(0);
-
-  console.log(count);
-  console.log("ordercount from authprovider", orderCount);
   if (count) {
     // setOrderCount(count);
   }
+  // console.log(count);
+  // console.log("ordercount from authprovider", orderCount);
+
   return { orders, setOrders, orderCount, setOrderCount, count, found };
 };
 

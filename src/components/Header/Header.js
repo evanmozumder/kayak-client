@@ -8,7 +8,7 @@ const Header = () => {
   const { user, handleLogout } = useFirebase();
   const { orders, setOrders, orderCount, setOrderCount, count } = useAuth();
   setOrderCount(count);
-  console.log("order count", orderCount);
+  // console.log("order count", orderCount);
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -20,12 +20,7 @@ const Header = () => {
             <Nav.Link as={Link} to="/home">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/features">
-              Features
-            </Nav.Link>
-            <Nav.Link as={Link} to="/pricing">
-              Pricing
-            </Nav.Link>
+
             {user?.email ? (
               <>
                 <Nav.Link onClick={handleLogout} as={Link} to="/">
@@ -58,9 +53,6 @@ const Header = () => {
               <>
                 <Nav.Link as={Link} to="/login">
                   Login
-                </Nav.Link>
-                <Nav.Link as={Link} to="/signup">
-                  Sign Up
                 </Nav.Link>
               </>
             )}

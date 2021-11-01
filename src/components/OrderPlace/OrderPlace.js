@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import useOrders from "../../hooks/useOrders";
 // import { clearTheCart } from "../../utilities/fakedb";
 import "./OrderPlace.css";
 
 const OrderPlace = () => {
   const { order_id } = useParams();
   const [details, setDetails] = useState({});
-
+  const history = useHistory();
   // getting ordered services
-  fetch(`https://murmuring-plains-87841.herokuapp.com/orders/${order_id}`)
+  fetch(
+    `https://murmuring-plains-87841.herokuapp.com/specificorder/${order_id}`
+  )
     .then((res) => res.json())
     .then((data) => setDetails(data));
   const {
@@ -20,17 +23,19 @@ const OrderPlace = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const { context, orders, setOrders, orderCount, setOrderCount } = useAuth();
+  const { context } = useAuth();
+  const { orderCount, setOrderCount } = useOrders();
+  const { orders, setOrders } = useOrders();
   const { user } = context;
 
   // setOrders(new_order);
-  console.log(orders);
+  // console.log(orders);
   const onSubmit = (data) => {
     // const savedCart = getStoredCart();
     // data.order = savedCart;
     // checking if user already exist or not
     const found = orders.find((order) => order.email === data.email);
-    console.log("before found", found);
+    // console.log("before found", found);
     if (found) {
       const new_order = [...found.orders, order_id];
       setOrderCount(new_order.length);
@@ -38,9 +43,9 @@ const OrderPlace = () => {
       found.address = data.address;
       found.city = data.city;
       found.phone = data.phone;
-      console.log("new state of old user", found);
-      console.log("data", data);
-      const url = `https://murmuring-plains-87841.herokuapp.com//${found._id}`;
+      // console.log("new state of old user", found);
+      // console.log("data", data);
+      const url = `https://murmuring-plains-87841.herokuapp.com/orders/${found._id}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -49,9 +54,15 @@ const OrderPlace = () => {
         body: JSON.stringify(found),
       })
         .then((res) => res.json())
-        .then((data) => {});
+        .then((data) => {
+          if (data.modifiedCount) {
+            alert("Booked Successfully");
+            history.push("/");
+          }
+        });
     } else {
       data.orders = [order_id];
+      setOrderCount(1);
       fetch("https://murmuring-plains-87841.herokuapp.com/orders", {
         method: "POST",
         headers: {
@@ -62,8 +73,8 @@ const OrderPlace = () => {
         .then((res) => res.json())
         .then((result) => {
           if (result.insertedId) {
-            alert("order processed successfully");
-            // clearTheCart();
+            alert("Booked successfully");
+            history.push("/");
             reset();
           }
         });
@@ -97,8 +108,7 @@ const OrderPlace = () => {
           defaultValue=""
           {...register("phone")}
         />
-
-        <input type="submit" />
+        <input className="btn btn-success" type="submit" value="Book Now" />
       </form>
     </div>
   );

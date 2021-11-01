@@ -10,7 +10,7 @@ const ManageAllOrders = () => {
     <div>
       <h2>manage orderws</h2>
       {orders.map((order) => (
-        <DisplayAllOrders order={order}></DisplayAllOrders>
+        <DisplayAllOrders key={order._id} order={order}></DisplayAllOrders>
       ))}
     </div>
   );
